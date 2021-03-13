@@ -1,6 +1,6 @@
 1. Add an option to change the layer of the map - completed
 2. Ability to delete all workouts
-3. Ability to delete a workout
+3. Ability to delete a workout - completed
 4. Ability to edit a workout
 5. Ability to sort workouts bu dist/dur or speed
 6. Fix the objects ineritance
