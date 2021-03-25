@@ -1,0 +1,12 @@
+1. Add an option to change the layer of the map
+2. Ability to delete all workouts
+3. Ability to delete a workout
+4. Ability to edit a workout
+5. Ability to sort workouts bu dist/dur or speed
+6. Fix the objects ineritance
+7. Create better error messages for form validation
+8. Position the map to show all the workouts
+9. Ability to draw lines and shapes instead of points
+
+10. Geocode location from coordinates (Faro, Portugal)
+11. Display weather for workouts time and place
