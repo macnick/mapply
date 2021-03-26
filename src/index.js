@@ -12,12 +12,23 @@ class App {
   #mymap;
   #latlng;
   #workouts = [];
+  #layers = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
 
   constructor() {
     this._getPosition();
     form.addEventListener('submit', e => this._newWorkout(e));
     inputType.addEventListener('change', this._toggleElevation);
     containerWorkouts.addEventListener('click', e => this._moveToMarker(e));
+  }
+
+  changeLayer(layer) {
+    L.tileLayer(
+      `http://{s}.google.com/vt/lyrs=${this.#layers[layer]}&x={x}&y={y}&z={z}`,
+      {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+      }
+    ).addTo(this.#mymap);
   }
 
   _getPosition() {
@@ -33,10 +44,10 @@ class App {
     let { latitude, longitude } = position.coords;
     this.#mymap = L.map('map').setView([latitude, longitude], 14);
 
-    const layer = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
+    // L.control.layers(baseMaps, overlayMaps).addTo(this.#mymap);
 
     L.tileLayer(
-      `http://{s}.google.com/vt/lyrs=${layer.hybrid}&x={x}&y={y}&z={z}`,
+      `http://{s}.google.com/vt/lyrs=${this.#layers.streets}&x={x}&y={y}&z={z}`,
       {
         maxZoom: 20,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
