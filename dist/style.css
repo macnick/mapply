@@ -101,6 +101,17 @@ a:visited {
   height: 0.28rem;
 }
 
+.workout__btns {
+  text-align: right;
+  grid-column-start: 4;
+}
+
+.workout__btn {
+  font-size: 1.6rem;
+  margin-right: 0.4rem;
+  height: 0.28rem;
+}
+
 .workout__value {
   font-size: 1.5rem;
   margin-right: 0.5rem;

@@ -152,7 +152,7 @@ class App {
     <li class="workout workout--${type}" data-id="${workout.id}">
     <h2 class="workout__title">${workout.description}</h2>
     <div class="workout__details">
-      <span class="workout__icon">${type === 'running' ? '🏃‍♂️' : '🚴‍♀️'}</span>
+      <span class="workout__icon">${type === 'running' ? '🏃‍♂' : '🚴‍♀️'}</span>
       <span class="workout__value">${workout.distance}</span>
       <span class="workout__unit">km</span>
     </div>
@@ -180,6 +180,10 @@ class App {
             <span class="workout__unit">${
               type === 'running' ? 'spm' : 'm'
             }</span>
+          </div>
+          <div class="workout__btns">
+          <span class="workout__btn">✏️</span>
+            <span class="workout__btn">🗑</span>
           </div>
         </li>
     `;
