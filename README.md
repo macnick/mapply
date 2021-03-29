@@ -13,7 +13,7 @@ The project was not compatible with older browser that do not support the newest
 3. Ability to delete a workout
 4. Ability to edit a workout
 5. Ability to sort workouts bu dist/dur or speed
-6. Fix the objects ineritance
+6. Fix the objects inheritance
 7. Create better error messages for form validation
 8. Position the map to show all the workouts
 9. Ability to draw lines and shapes instead of points

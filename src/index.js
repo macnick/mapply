@@ -182,8 +182,8 @@ class App {
             }</span>
           </div>
           <div class="workout__btns">
-          <span class="workout__btn">✏️</span>
-            <span class="workout__btn">🗑</span>
+          <span class="workout__btn edit">✏️</span>
+            <span class="workout__btn delete">🗑</span>
           </div>
         </li>
     `;
@@ -202,6 +202,7 @@ class App {
       animate: true,
       pan: { duration: 1 },
     });
+    this._deleteWorkout(e, workout);
   }
 
   _storeWorkouts() {
@@ -213,10 +214,40 @@ class App {
     if (!data) return;
     // now we have lost the __proto__ chain because we load just objects from localStorage
     // to restore it I have to write code inside the forEach()
-    this.#workouts = data;
+    data.forEach(work => {
+      if (work.type == 'running') {
+        this.#workouts.push(
+          new Running(
+            work.coords,
+            work.dist,
+            work.duration,
+            work.cadence,
+            work.type
+          )
+        );
+      }
+      if (work.type == 'cycling') {
+        this.#workouts.push(
+          new Running(
+            work.coords,
+            work.dist,
+            work.duration,
+            work.elevGain,
+            work.type
+          )
+        );
+      }
+    });
+    // this.#workouts = data;
     this.#workouts.forEach(w => {
       this._renderWorkoutMarker(w);
     });
+  }
+
+  _deleteWorkout(e, workout) {
+    if (e.target.classList.contains('delete')) {
+      console.log(this.#workouts);
+    }
   }
 
   reset() {
