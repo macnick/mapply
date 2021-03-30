@@ -152,7 +152,7 @@ class App {
     <li class="workout workout--${type}" data-id="${workout.id}">
     <h2 class="workout__title">${workout.description}</h2>
     <div class="workout__details">
-      <span class="workout__icon">${type === 'running' ? '🏃‍♂️' : '🚴‍♀️'}</span>
+      <span class="workout__icon">${type === 'running' ? '🏃‍♂' : '🚴‍♀️'}</span>
       <span class="workout__value">${workout.distance}</span>
       <span class="workout__unit">km</span>
     </div>
@@ -181,6 +181,10 @@ class App {
               type === 'running' ? 'spm' : 'm'
             }</span>
           </div>
+          <div class="workout__btns">
+          <span class="workout__btn edit">✏️</span>
+            <span class="workout__btn delete">🗑</span>
+          </div>
         </li>
     `;
     form.style.display = 'none';
@@ -198,6 +202,7 @@ class App {
       animate: true,
       pan: { duration: 1 },
     });
+    this._deleteWorkout(e, workout);
   }
 
   _storeWorkouts() {
@@ -209,10 +214,41 @@ class App {
     if (!data) return;
     // now we have lost the __proto__ chain because we load just objects from localStorage
     // to restore it I have to write code inside the forEach()
-    this.#workouts = data;
+    data.forEach(work => {
+      if (work.type == 'running') {
+        this.#workouts.push(
+          new Running(
+            work.coords,
+            work.distance,
+            work.duration,
+            work.cadence,
+            work.pace,
+            work.type
+          )
+        );
+      }
+      if (work.type == 'cycling') {
+        this.#workouts.push(
+          new Cycling(
+            work.coords,
+            work.distance,
+            work.duration,
+            work.elevGain,
+            work.speed,
+            work.type
+          )
+        );
+      }
+    });
     this.#workouts.forEach(w => {
       this._renderWorkoutMarker(w);
     });
+  }
+
+  _deleteWorkout(e, workout) {
+    if (e.target.classList.contains('delete')) {
+      console.log(this.#workouts);
+    }
   }
 
   reset() {
