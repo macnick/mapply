@@ -206,7 +206,6 @@ class App {
   }
 
   _storeWorkouts() {
-    console.log(this.#workouts);
     localStorage.setItem('workouts', JSON.stringify(this.#workouts));
   }
 
@@ -215,9 +214,7 @@ class App {
     if (!data) return;
     // now we have lost the __proto__ chain because we load just objects from localStorage
     // to restore it I have to write code inside the forEach()
-    console.log('this is data from localstorage after parsing:', data);
     data.forEach(work => {
-      console.log('this is a workout after parsing:', work);
       if (work.type == 'running') {
         this.#workouts.push(
           new Running(
@@ -242,9 +239,7 @@ class App {
           )
         );
       }
-      console.log('This is the #workouts after pushing:', this.#workouts);
     });
-    // this.#workouts = data;
     this.#workouts.forEach(w => {
       this._renderWorkoutMarker(w);
     });
