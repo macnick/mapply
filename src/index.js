@@ -42,15 +42,14 @@ class App {
 
   _deleteWorkout(id) {
     for (let i = 0; i < this.#workouts.length; i++) {
-      console.log(this.#workouts[i].id, id, 'length:', this.#workouts.length);
       if (this.#workouts[i].id == id) {
         this.#workouts.splice(i, 1);
       }
     }
     console.log(this.#workouts);
     this._storeWorkouts();
-    form.insertAdjacentHTML('afterBegin', '');
-    this._loadWorkouts();
+    const work = document.getElementById(id);
+    work.remove();
   }
 
   _getPosition() {
@@ -171,7 +170,9 @@ class App {
   _renderWorkout(workout) {
     let { type } = workout;
     const html = `
-    <li class="workout workout--${type}" data-id="${workout.id}">
+    <li class="workout workout--${type}" data-id="${workout.id}" id="${
+      workout.id
+    }">
     <h2 class="workout__title">${workout.description}</h2>
     <div class="workout__details">
       <span class="workout__icon">${type === 'running' ? '🏃‍♂' : '🚴‍♀️'}</span>
@@ -199,7 +200,7 @@ class App {
               type === 'running' ? '👟' : '⛰'
             }</span>
             <span class="workout__value">${
-              type === 'running' ? workout.pace : workout.elevGain
+              type === 'running' ? workout.pace.toFixed(1) : workout.elevGain
             }</span>
             <span class="workout__unit">${
               type === 'running' ? 'spm' : 'm'
