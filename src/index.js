@@ -18,7 +18,7 @@ class App {
     this._getPosition();
     form.addEventListener('submit', e => this._newWorkout(e));
     inputType.addEventListener('change', this._toggleElevation);
-    containerWorkouts.addEventListener('click', e => this._moveToMarker(e));
+    containerWorkouts.addEventListener('click', e => this._handleClick(e));
   }
 
   changeLayer(layer) {
@@ -29,6 +29,28 @@ class App {
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       }
     ).addTo(this.#mymap);
+  }
+
+  _handleClick(e) {
+    this._moveToMarker(e);
+    if (e.target.className.includes('trash')) {
+      let workoutId = e.target.closest('.workout').dataset.id;
+      this._deleteWorkout(workoutId);
+      // alert('are you sure?');
+    }
+  }
+
+  _deleteWorkout(id) {
+    for (let i = 0; i < this.#workouts.length; i++) {
+      console.log(this.#workouts[i].id, id, 'length:', this.#workouts.length);
+      if (this.#workouts[i].id == id) {
+        this.#workouts.splice(i, 1);
+      }
+    }
+    console.log(this.#workouts);
+    this._storeWorkouts();
+    form.insertAdjacentHTML('afterBegin', '');
+    this._loadWorkouts();
   }
 
   _getPosition() {
@@ -177,15 +199,15 @@ class App {
               type === 'running' ? '👟' : '⛰'
             }</span>
             <span class="workout__value">${
-              type === 'running' ? workout.pace.toFixed(1) : workout.elevGain
+              type === 'running' ? workout.pace : workout.elevGain
             }</span>
             <span class="workout__unit">${
               type === 'running' ? 'spm' : 'm'
             }</span>
           </div>
           <div class="workout__btns">
-          <span class="workout__btn">✏️</span>
-            <span class="workout__btn">🗑</span>
+          <span class="workout__btn edit">✏️</span>
+            <span class="workout__btn trash">🗑</span>
           </div>
         </li>
     `;
