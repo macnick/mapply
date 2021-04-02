@@ -48,8 +48,8 @@ class App {
     }
     console.log(this.#workouts);
     this._storeWorkouts();
-    const work = document.getElementById(id);
-    work.remove();
+    document.getElementById(id).remove();
+    // also we have to remove the marker
   }
 
   _getPosition() {
