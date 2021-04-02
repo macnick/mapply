@@ -176,7 +176,9 @@ class App {
             <span class="workout__icon">${
               type === 'running' ? '👟' : '⛰'
             }</span>
-            <span class="workout__value">178</span>
+            <span class="workout__value">${
+              type === 'running' ? workout.pace.toFixed(1) : workout.elevGain
+            }</span>
             <span class="workout__unit">${
               type === 'running' ? 'spm' : 'm'
             }</span>
