@@ -227,7 +227,7 @@ class App {
       animate: true,
       pan: { duration: 1 },
     });
-    this._deleteWorkout(e, workout);
+    this._deleteWorkout(id);
   }
 
   _storeWorkouts() {
@@ -268,12 +268,6 @@ class App {
     this.#workouts.forEach(w => {
       this._renderWorkoutMarker(w);
     });
-  }
-
-  _deleteWorkout(e, workout) {
-    if (e.target.classList.contains('delete')) {
-      console.log(this.#workouts);
-    }
   }
 
   reset() {
