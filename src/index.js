@@ -227,7 +227,6 @@ class App {
       animate: true,
       pan: { duration: 1 },
     });
-    this._deleteWorkout(id);
   }
 
   _storeWorkouts() {
@@ -237,8 +236,6 @@ class App {
   _loadWorkouts() {
     let data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
-    // now we have lost the __proto__ chain because we load just objects from localStorage
-    // to restore it I have to write code inside the forEach()
     data.forEach(work => {
       if (work.type == 'running') {
         this.#workouts.push(
