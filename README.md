@@ -6,6 +6,10 @@ This project is based on [Jonas Schmedtmann's](https://github.com/jonasschmedtma
 
 The project was not compatible with older browser that do not support the newest features of JavaScript like private class methods and private class properties. I solved this problem by adding Babel 7. Also added webpack to package a smaller solution.
 
+## Improvements
+
+1. Workout data is saved to localStorage. The data is converted to JSON and as a result, the classes and all inheritance are destroyed. Fixed this by recreating the objects while loading them from the localStorage.
+
 ## What is next
 
 1. Add an option to change the layer of the map
@@ -13,13 +17,12 @@ The project was not compatible with older browser that do not support the newest
 3. Ability to delete a workout
 4. Ability to edit a workout
 5. Ability to sort workouts bu dist/dur or speed
-6. Fix the objects inheritance
-7. Create better error messages for form validation
-8. Position the map to show all the workouts
-9. Ability to draw lines and shapes instead of points
+6. Create better error messages for form validation
+7. Position the map to show all the workouts
+8. Ability to draw lines and shapes instead of points
 
-10. Geocode location from coordinates (Faro, Portugal)
-11. Display weather for workouts time and place
+9. Geocode location from coordinates (Faro, Portugal)
+10. Display weather for workouts time and place
 
 # How to Install and Run in Your Computer
 
