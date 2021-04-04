@@ -43,10 +43,10 @@ class App {
   _deleteWorkout(id) {
     for (let i = 0; i < this.#workouts.length; i++) {
       if (this.#workouts[i].id == id) {
+        this._deleteMarker(this.#workouts[i]);
         this.#workouts.splice(i, 1);
       }
     }
-    console.log(this.#workouts);
     this._storeWorkouts();
     document.getElementById(id).remove();
     // also we have to remove the marker
@@ -144,6 +144,13 @@ class App {
     }
   }
 
+  _deleteMarker(workout) {
+    console.log('trying to delete the marker now');
+    let { lat, lng } = workout.coords;
+    let tempMarker = [lat, lng];
+    this.#mymap.removeLayer(tempMarker);
+  }
+
   _renderWorkoutMarker(workout) {
     let { lat, lng } = workout.coords;
     L.marker([lat, lng])
@@ -227,7 +234,6 @@ class App {
       animate: true,
       pan: { duration: 1 },
     });
-    this._deleteWorkout(e, workout);
   }
 
   _storeWorkouts() {
@@ -237,8 +243,6 @@ class App {
   _loadWorkouts() {
     let data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
-    // now we have lost the __proto__ chain because we load just objects from localStorage
-    // to restore it I have to write code inside the forEach()
     data.forEach(work => {
       if (work.type == 'running') {
         this.#workouts.push(
@@ -268,12 +272,6 @@ class App {
     this.#workouts.forEach(w => {
       this._renderWorkoutMarker(w);
     });
-  }
-
-  _deleteWorkout(e, workout) {
-    if (e.target.classList.contains('delete')) {
-      console.log(this.#workouts);
-    }
   }
 
   reset() {
