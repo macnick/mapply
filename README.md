@@ -9,12 +9,13 @@ The project was not compatible with older browser that do not support the newest
 ## Improvements
 
 1. Workout data is saved to localStorage. The data is converted to JSON and as a result, the classes and all inheritance are destroyed. Fixed this by recreating the objects while loading them from the localStorage.
+2. By clicking the trash icon next to a workout you can delete it. It is removed from the list and the localStorage.
 
 ## What is next
 
 1. Add an option to change the layer of the map
 2. Ability to delete all workouts
-3. Ability to delete a workout
+3. Remove the marker when deleting a workout
 4. Ability to edit a workout
 5. Ability to sort workouts bu dist/dur or speed
 6. Create better error messages for form validation
@@ -22,6 +23,8 @@ The project was not compatible with older browser that do not support the newest
 8. Ability to draw lines and shapes instead of points
 9. Geocode location from coordinates (Faro, Portugal)
 10. Display weather for workouts time and place
+11. Add an alert before deleting a workout
+12. Fix the Date problem -- All dates are being reset to current day
 
 # How to Install and Run in Your Computer
 
