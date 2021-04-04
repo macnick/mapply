@@ -43,10 +43,10 @@ class App {
   _deleteWorkout(id) {
     for (let i = 0; i < this.#workouts.length; i++) {
       if (this.#workouts[i].id == id) {
+        this._deleteMarker(this.#workouts[i]);
         this.#workouts.splice(i, 1);
       }
     }
-    console.log(this.#workouts);
     this._storeWorkouts();
     document.getElementById(id).remove();
     // also we have to remove the marker
@@ -142,6 +142,13 @@ class App {
       this.#workouts.push(workout);
       this._renderWorkoutMarker(workout);
     }
+  }
+
+  _deleteMarker(workout) {
+    console.log('trying to delete the marker now');
+    let { lat, lng } = workout.coords;
+    let tempMarker = [lat, lng];
+    this.#mymap.removeLayer(tempMarker);
   }
 
   _renderWorkoutMarker(workout) {

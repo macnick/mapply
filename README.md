@@ -17,7 +17,7 @@ The project was not compatible with older browser that do not support the newest
 2. Ability to delete all workouts
 3. Remove the marker when deleting a workout
 4. Ability to edit a workout
-5. Ability to sort workouts bu dist/dur or speed
+5. Ability to show workouts based on category
 6. Create better error messages for form validation
 7. Position the map to show all the workouts
 8. Ability to draw lines and shapes instead of points
