@@ -124,7 +124,14 @@ class App {
       if (this._notValid(cadence))
         return alert('Cadence must be a positive number!');
 
-      const workout = new Running(this.#latlng, dist, duration, cadence, type);
+      const workout = new Running(
+        this.#latlng,
+        dist,
+        duration,
+        new Date(),
+        cadence,
+        type
+      );
       this.#workouts.push(workout);
       this._renderWorkoutMarker(workout);
     }
@@ -137,6 +144,7 @@ class App {
         this.#latlng,
         dist,
         duration,
+        new Date(),
         elevation,
         type
       );
@@ -172,7 +180,9 @@ class App {
       .openPopup();
     this._clearForm();
     this._renderWorkout(workout);
+    console.log(this.#workouts, 'before storing');
     this._storeWorkouts();
+    console.log(this.#workouts, 'after storing');
   }
 
   _renderWorkout(workout) {
@@ -242,6 +252,8 @@ class App {
   }
 
   _loadWorkouts() {
+    console.log('Loading workouts...', new Date());
+    alert('loading...');
     let data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
     data.forEach(work => {
@@ -251,6 +263,7 @@ class App {
             work.coords,
             work.distance,
             work.duration,
+            work.date,
             work.cadence,
             work.pace,
             work.type
@@ -263,6 +276,7 @@ class App {
             work.coords,
             work.distance,
             work.duration,
+            work.date,
             work.elevGain,
             work.speed,
             work.type
@@ -281,4 +295,3 @@ class App {
 }
 
 const app = new App();
-console.log(data);

@@ -22,7 +22,7 @@ The project was not compatible with older browser that do not support the newest
 6. Create better error messages for form validation
 7. Position the map to show all the workouts
 8. Ability to draw lines and shapes instead of points
-9. Geocode location from coordinates (Faro, Portugal)
+9. Geocode location from coordinates (Athens, Greece)
 10. Display weather for workouts time and place
 11. Add an alert before deleting a workout
 12. Fix the Date problem -- All dates are being reset to current day
