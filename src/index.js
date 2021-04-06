@@ -1,4 +1,5 @@
 'use strict';
+import { Running, Cycling } from './workoutClasses';
 
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
@@ -12,12 +13,44 @@ class App {
   #mymap;
   #latlng;
   #workouts = [];
+  #layers = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
 
   constructor() {
     this._getPosition();
     form.addEventListener('submit', e => this._newWorkout(e));
     inputType.addEventListener('change', this._toggleElevation);
-    containerWorkouts.addEventListener('click', e => this._moveToMarker(e));
+    containerWorkouts.addEventListener('click', e => this._handleClick(e));
+  }
+
+  changeLayer(layer) {
+    L.tileLayer(
+      `http://{s}.google.com/vt/lyrs=${this.#layers[layer]}&x={x}&y={y}&z={z}`,
+      {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+      }
+    ).addTo(this.#mymap);
+  }
+
+  _handleClick(e) {
+    this._moveToMarker(e);
+    if (e.target.className.includes('trash')) {
+      let workoutId = e.target.closest('.workout').dataset.id;
+      this._deleteWorkout(workoutId);
+      // alert('are you sure?');
+    }
+  }
+
+  _deleteWorkout(id) {
+    for (let i = 0; i < this.#workouts.length; i++) {
+      if (this.#workouts[i].id == id) {
+        this._deleteMarker(this.#workouts[i]);
+        this.#workouts.splice(i, 1);
+      }
+    }
+    this._storeWorkouts();
+    document.getElementById(id).remove();
+    // also we have to remove the marker
   }
 
   _getPosition() {
@@ -33,10 +66,10 @@ class App {
     let { latitude, longitude } = position.coords;
     this.#mymap = L.map('map').setView([latitude, longitude], 14);
 
-    const layer = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
+    // L.control.layers(baseMaps, overlayMaps).addTo(this.#mymap);
 
     L.tileLayer(
-      `http://{s}.google.com/vt/lyrs=${layer.hybrid}&x={x}&y={y}&z={z}`,
+      `http://{s}.google.com/vt/lyrs=${this.#layers.streets}&x={x}&y={y}&z={z}`,
       {
         maxZoom: 20,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
@@ -112,6 +145,13 @@ class App {
     }
   }
 
+  _deleteMarker(workout) {
+    console.log('trying to delete the marker now');
+    let { lat, lng } = workout.coords;
+    let tempMarker = [lat, lng];
+    this.#mymap.removeLayer(tempMarker);
+  }
+
   _renderWorkoutMarker(workout) {
     let { lat, lng } = workout.coords;
     L.marker([lat, lng])
@@ -138,10 +178,12 @@ class App {
   _renderWorkout(workout) {
     let { type } = workout;
     const html = `
-    <li class="workout workout--${type}" data-id="${workout.id}">
+    <li class="workout workout--${type}" data-id="${workout.id}" id="${
+      workout.id
+    }">
     <h2 class="workout__title">${workout.description}</h2>
     <div class="workout__details">
-      <span class="workout__icon">${type === 'running' ? '🏃‍♂️' : '🚴‍♀️'}</span>
+      <span class="workout__icon">${type === 'running' ? '🏃‍♂' : '🚴‍♀️'}</span>
       <span class="workout__value">${workout.distance}</span>
       <span class="workout__unit">km</span>
     </div>
@@ -165,10 +207,16 @@ class App {
             <span class="workout__icon">${
               type === 'running' ? '👟' : '⛰'
             }</span>
-            <span class="workout__value">178</span>
+            <span class="workout__value">${
+              type === 'running' ? workout.pace.toFixed(1) : workout.elevGain
+            }</span>
             <span class="workout__unit">${
               type === 'running' ? 'spm' : 'm'
             }</span>
+          </div>
+          <div class="workout__btns">
+          <span class="workout__btn edit">✏️</span>
+            <span class="workout__btn trash">🗑</span>
           </div>
         </li>
     `;
@@ -196,9 +244,32 @@ class App {
   _loadWorkouts() {
     let data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
-    // now we have lost the __proto__ chain because we load just objects from localStorage
-    // to restore it I have to write code inside the forEach()
-    this.#workouts = data;
+    data.forEach(work => {
+      if (work.type == 'running') {
+        this.#workouts.push(
+          new Running(
+            work.coords,
+            work.distance,
+            work.duration,
+            work.cadence,
+            work.pace,
+            work.type
+          )
+        );
+      }
+      if (work.type == 'cycling') {
+        this.#workouts.push(
+          new Cycling(
+            work.coords,
+            work.distance,
+            work.duration,
+            work.elevGain,
+            work.speed,
+            work.type
+          )
+        );
+      }
+    });
     this.#workouts.forEach(w => {
       this._renderWorkoutMarker(w);
     });
@@ -209,52 +280,5 @@ class App {
   }
 }
 
-class Workout {
-  date = new Date();
-  id = Date.now().toString().slice(-9);
-
-  constructor(coords, distance, duration) {
-    this.coords = coords;
-    this.distance = distance;
-    this.duration = duration;
-  }
-
-  _setDescription() {
-    // prettier-ignore
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
-      months[this.date.getMonth()]
-    } ${this.date.getDate()}`;
-  }
-}
-
-class Running extends Workout {
-  type = 'running';
-  constructor(coords, distance, duration, cadence) {
-    super(coords, distance, duration);
-    this.cadence = cadence;
-    this.calcPace();
-    this._setDescription();
-  }
-
-  calcPace() {
-    this.pace = this.duration / this.distance;
-    return this;
-  }
-}
-
-class Cycling extends Workout {
-  type = 'cycling';
-  constructor(coords, distance, duration, elevGain) {
-    super(coords, distance, duration);
-    this.elevGain = elevGain;
-    this.calcSpeed();
-    this._setDescription();
-  }
-
-  calcSpeed() {
-    this.speed = (this.distance / this.duration) * 60;
-  }
-}
-
 const app = new App();
+console.log(data);

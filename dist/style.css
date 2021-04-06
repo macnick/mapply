@@ -97,7 +97,18 @@ a:visited {
 
 .workout__icon {
   font-size: 1.8rem;
-  margin-right: 0.2rem;
+  margin-right: 2px;
+  height: 0.28rem;
+}
+
+.workout__btns {
+  text-align: right;
+  grid-column-start: 4;
+}
+
+.workout__btn {
+  font-size: 1.6rem;
+  margin-right: 0.4rem;
   height: 0.28rem;
 }
 
