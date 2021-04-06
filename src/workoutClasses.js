@@ -2,7 +2,7 @@ class Workout {
   id = Date.now().toString().slice(-9);
 
   constructor(coords, distance, duration, date) {
-    this.date = date ? new Date(date) : new Date();
+    this.date = date;
     this.coords = coords;
     this.distance = distance;
     this.duration = duration;

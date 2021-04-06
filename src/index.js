@@ -253,6 +253,7 @@ class App {
 
   _loadWorkouts() {
     console.log('Loading workouts...');
+    alert('Loading workouts.');
     let data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
     data.forEach(work => {
