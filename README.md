@@ -25,6 +25,7 @@ The project was not compatible with older browser that do not support the newest
 10. Display weather for workouts time and place
 11. Add an alert before deleting a workout
 12. Fix the Date problem -- All dates are being reset to current day
+13. Move classes to a separate file
 
 # How to Install and Run in Your Computer
 
