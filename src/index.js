@@ -1,5 +1,5 @@
 'use strict';
-import { Running, Cycling } from './workClasses';
+import { Running, Cycling } from './workoutClasses';
 
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
