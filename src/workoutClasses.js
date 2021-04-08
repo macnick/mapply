@@ -2,10 +2,12 @@ class Workout {
   id = Date.now().toString().slice(-9);
 
   constructor(coords, distance, duration, date) {
+    console.log('date:', date);
+    this.date = date ? new Date(date) : new Date();
+    console.log('this.date:', this.date, date);
     this.coords = coords;
     this.distance = distance;
     this.duration = duration;
-    this.date = date;
   }
 
   _setDescription() {
