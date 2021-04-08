@@ -1,5 +1,5 @@
 'use strict';
-import { Running, Cycling } from './workoutClasses';
+import { Running, Cycling } from './workoutClasses.js';
 
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
@@ -124,8 +124,17 @@ class App {
       if (this._notValid(cadence))
         return alert('Cadence must be a positive number!');
 
-      const workout = new Running(this.#latlng, dist, duration, cadence, type);
+      const workout = new Running(
+        this.#latlng,
+        dist,
+        duration,
+        new Date(),
+        cadence,
+        type
+      );
+
       this.#workouts.push(workout);
+      console.log(this.#workouts);
       this._renderWorkoutMarker(workout);
     }
 
@@ -137,6 +146,7 @@ class App {
         this.#latlng,
         dist,
         duration,
+        new Date(),
         elevation,
         type
       );
@@ -242,6 +252,8 @@ class App {
   }
 
   _loadWorkouts() {
+    console.log('Loading workouts...');
+    alert('Loading workouts.');
     let data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
     data.forEach(work => {
@@ -251,6 +263,7 @@ class App {
             work.coords,
             work.distance,
             work.duration,
+            new Date(work.date),
             work.cadence,
             work.pace,
             work.type
@@ -263,6 +276,7 @@ class App {
             work.coords,
             work.distance,
             work.duration,
+            new Date(work.date),
             work.elevGain,
             work.speed,
             work.type
@@ -281,4 +295,3 @@ class App {
 }
 
 const app = new App();
-console.log(data);

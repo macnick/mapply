@@ -1,8 +1,8 @@
 class Workout {
-  date = new Date();
   id = Date.now().toString().slice(-9);
 
-  constructor(coords, distance, duration) {
+  constructor(coords, distance, duration, date) {
+    this.date = date;
     this.coords = coords;
     this.distance = distance;
     this.duration = duration;
@@ -19,8 +19,8 @@ class Workout {
 
 export class Running extends Workout {
   type = 'running';
-  constructor(coords, distance, duration, cadence) {
-    super(coords, distance, duration);
+  constructor(coords, distance, duration, date, cadence) {
+    super(coords, distance, duration, date);
     this.cadence = cadence;
     this.calcPace();
     this._setDescription();
@@ -34,8 +34,8 @@ export class Running extends Workout {
 
 export class Cycling extends Workout {
   type = 'cycling';
-  constructor(coords, distance, duration, elevGain) {
-    super(coords, distance, duration);
+  constructor(coords, distance, duration, date, elevGain) {
+    super(coords, distance, duration, date);
     this.elevGain = elevGain;
     this.calcSpeed();
     this._setDescription();
