@@ -14,6 +14,10 @@ class App {
   #latlng;
   #workouts = [];
   #layers = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
+  #g_roadmap = new L.Google('STREETS');
+  #g_hybrid = new L.Google('HYBRID');
+  #g_satellite = new L.Google('SATELLITE');
+  #g_terrain = new L.Google('TERRAIN');
 
   constructor() {
     this._getPosition();
@@ -252,8 +256,6 @@ class App {
   }
 
   _loadWorkouts() {
-    console.log('Loading workouts...');
-    alert('Loading workouts.');
     let data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
     data.forEach(work => {
