@@ -11,7 +11,7 @@ The project was not compatible with older browser that do not support the newest
 1. Workout data is saved to localStorage. The data is converted to JSON and as a result, the classes and all inheritance are destroyed. Fixed this by recreating the objects while loading them from the localStorage.
 2. By clicking the trash icon next to a workout you can delete it. It is removed from the list and the localStorage.
 3. Workout, Running and Cycling classes are in a separate file.
-4. Fixed the Date problem. All dates are being saved and restored correctly.
+4. Fixed the Date reset to today problem. All dates are being saved and restored correctly.
 
 ## What is next
 
