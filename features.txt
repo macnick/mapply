@@ -1,3 +1,4 @@
+1. Create a message when no workouts are saved
 2. Ability to delete all workouts
 3. Ability to edit a workout
 4. Ability to sort workouts bu dist/dur or speed
