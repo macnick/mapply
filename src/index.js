@@ -13,21 +13,17 @@ class App {
   #mymap;
   #latlng;
   #workouts = [];
-  #layers = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
-  streets = L.tileLayer(`http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}`, {
-    maxZoom: 20,
-    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-  });
-  hybrid = L.tileLayer(`http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}`, {
-    maxZoom: 20,
-    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-  });
+  #layers = { streets: 'm', hybrid: 's,h', sat: 's', terrain: 'p' };
+  streets = this._changeLayer('streets');
+  hybrid = this._changeLayer('hybrid');
   satellite = this._changeLayer('sat');
+  terrain = this._changeLayer('terrain');
 
   basemaps = {
     Streets: this.streets,
-    Hybrid: this.hybrid,
     Satellite: this.satellite,
+    Hybrid: this.hybrid,
+    Terrain: this.terrain,
   };
 
   constructor() {
