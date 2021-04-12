@@ -14,10 +14,19 @@ class App {
   #latlng;
   #workouts = [];
   #layers = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
-  #g_roadmap = new L.Google('STREETS');
-  #g_hybrid = new L.Google('HYBRID');
-  #g_satellite = new L.Google('SATELLITE');
-  #g_terrain = new L.Google('TERRAIN');
+  basemaps = {
+    Streets: this.streets,
+    Hybrid: this.hybrid,
+  };
+
+  streets = L.tileLayer(`http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}`, {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+  });
+  hybrid = L.tileLayer(`http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}`, {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+  });
 
   constructor() {
     this._getPosition();
@@ -26,7 +35,7 @@ class App {
     containerWorkouts.addEventListener('click', e => this._handleClick(e));
   }
 
-  changeLayer(layer) {
+  _changeLayer(layer) {
     L.tileLayer(
       `http://{s}.google.com/vt/lyrs=${this.#layers[layer]}&x={x}&y={y}&z={z}`,
       {
@@ -68,9 +77,10 @@ class App {
 
   _loadMap(position) {
     let { latitude, longitude } = position.coords;
-    this.#mymap = L.map('map').setView([latitude, longitude], 14);
-
-    // L.control.layers(baseMaps, overlayMaps).addTo(this.#mymap);
+    this.#mymap = L.map('map', { layers: [this.streets, this.hybrid] }).setView(
+      [latitude, longitude],
+      14
+    );
 
     L.tileLayer(
       `http://{s}.google.com/vt/lyrs=${this.#layers.streets}&x={x}&y={y}&z={z}`,
@@ -79,6 +89,12 @@ class App {
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       }
     ).addTo(this.#mymap);
+
+    //
+    //
+    L.control.layers({ street: {}, Hybrid: {} }, null).addTo(this.#mymap);
+    //
+    //
 
     L.marker([latitude, longitude])
       .addTo(this.#mymap)
@@ -115,6 +131,10 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
 
+    // test
+    this._changeLayer('terain');
+
+    //
     const type = inputType.value;
     const dist = +inputDistance.value;
     const duration = +inputDuration.value;
