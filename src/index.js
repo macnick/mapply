@@ -13,7 +13,18 @@ class App {
   #mymap;
   #latlng;
   #workouts = [];
-  #layers = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
+  #layers = { streets: 'm', hybrid: 's,h', sat: 's', terrain: 'p' };
+  streets = this._changeLayer('streets');
+  hybrid = this._changeLayer('hybrid');
+  satellite = this._changeLayer('sat');
+  terrain = this._changeLayer('terrain');
+
+  basemaps = {
+    Streets: this.streets,
+    Satellite: this.satellite,
+    Hybrid: this.hybrid,
+    Terrain: this.terrain,
+  };
 
   constructor() {
     this._getPosition();
@@ -22,14 +33,14 @@ class App {
     containerWorkouts.addEventListener('click', e => this._handleClick(e));
   }
 
-  changeLayer(layer) {
-    L.tileLayer(
+  _changeLayer(layer) {
+    return L.tileLayer(
       `http://{s}.google.com/vt/lyrs=${this.#layers[layer]}&x={x}&y={y}&z={z}`,
       {
         maxZoom: 20,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       }
-    ).addTo(this.#mymap);
+    );
   }
 
   _handleClick(e) {
@@ -64,9 +75,10 @@ class App {
 
   _loadMap(position) {
     let { latitude, longitude } = position.coords;
-    this.#mymap = L.map('map').setView([latitude, longitude], 14);
-
-    // L.control.layers(baseMaps, overlayMaps).addTo(this.#mymap);
+    this.#mymap = L.map('map', { layers: [this.streets, this.hybrid] }).setView(
+      [latitude, longitude],
+      14
+    );
 
     L.tileLayer(
       `http://{s}.google.com/vt/lyrs=${this.#layers.streets}&x={x}&y={y}&z={z}`,
@@ -75,6 +87,12 @@ class App {
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       }
     ).addTo(this.#mymap);
+
+    //
+    //
+    L.control.layers(this.basemaps, null).addTo(this.#mymap);
+    //
+    //
 
     L.marker([latitude, longitude])
       .addTo(this.#mymap)
@@ -111,6 +129,10 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
 
+    // test
+    this._changeLayer('terain');
+
+    //
     const type = inputType.value;
     const dist = +inputDistance.value;
     const duration = +inputDuration.value;
@@ -252,8 +274,6 @@ class App {
   }
 
   _loadWorkouts() {
-    console.log('Loading workouts...');
-    alert('Loading workouts.');
     let data = JSON.parse(localStorage.getItem('workouts'));
     if (!data) return;
     data.forEach(work => {
