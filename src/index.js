@@ -14,11 +14,6 @@ class App {
   #latlng;
   #workouts = [];
   #layers = { streets: 'm', hybrid: 's,h', sat: 's', terain: 'p' };
-  basemaps = {
-    Streets: this.streets,
-    Hybrid: this.hybrid,
-  };
-
   streets = L.tileLayer(`http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}`, {
     maxZoom: 20,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
@@ -27,6 +22,13 @@ class App {
     maxZoom: 20,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
   });
+  satellite = this._changeLayer('sat');
+
+  basemaps = {
+    Streets: this.streets,
+    Hybrid: this.hybrid,
+    Satellite: this.satellite,
+  };
 
   constructor() {
     this._getPosition();
@@ -36,13 +38,13 @@ class App {
   }
 
   _changeLayer(layer) {
-    L.tileLayer(
+    return L.tileLayer(
       `http://{s}.google.com/vt/lyrs=${this.#layers[layer]}&x={x}&y={y}&z={z}`,
       {
         maxZoom: 20,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
       }
-    ).addTo(this.#mymap);
+    );
   }
 
   _handleClick(e) {
@@ -92,7 +94,7 @@ class App {
 
     //
     //
-    L.control.layers({ street: {}, Hybrid: {} }, null).addTo(this.#mymap);
+    L.control.layers(this.basemaps, null).addTo(this.#mymap);
     //
     //
 
