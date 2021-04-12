@@ -12,20 +12,20 @@ The project was not compatible with older browser that do not support the newest
 2. By clicking the trash icon next to a workout you can delete it. It is removed from the list and the localStorage.
 3. Workout, Running and Cycling classes are in a separate file.
 4. Fixed the Date reset to today problem. All dates are being saved and restored correctly.
+5. Add map control to select which kind of map display. Available option are Streets, Satellite, Hybrid, and Terrain
 
 ## What is next
 
-1. Add an option to change the layer of the map
-2. Ability to delete all workouts
-3. Remove the marker when deleting a workout
-4. Ability to edit a workout
-5. Ability to show workouts based on category
+1. Ability to delete all workouts
+2. Remove the marker when deleting a workout
+3. Ability to edit a workout
+4. Ability to show workouts based on category
+5. Add an alert before deleting a workout
 6. Create better error messages for form validation
 7. Position the map to show all the workouts
 8. Ability to draw lines and shapes instead of points
 9. Geocode location from coordinates (Athens, Greece)
 10. Display weather for workouts time and place
-11. Add an alert before deleting a workout
 
 # How to Install and Run in Your Computer
 
