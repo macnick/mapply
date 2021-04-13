@@ -12,7 +12,7 @@ The project was not compatible with older browser that do not support the newest
 2. By clicking the trash icon next to a workout you can delete it. It is removed from the list and the localStorage.
 3. Workout, Running and Cycling classes are in a separate file.
 4. Fixed the Date reset to today problem. All dates are being saved and restored correctly.
-5. Add map control to select which kind of map display. Available option are Streets, Satellite, Hybrid, and Terrain
+5. Add map control to select which kind of map display. Available options are Streets, Satellite, Hybrid, and Terrain
 
 ## What is next
 
