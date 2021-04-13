@@ -14,10 +14,10 @@ class App {
   #latlng;
   #workouts = [];
   #layers = { streets: 'm', hybrid: 's,h', sat: 's', terrain: 'p' };
-  streets = this.createLayer('streets');
-  hybrid = this.createLayer('hybrid');
-  satellite = this.createLayer('sat');
-  terrain = this.createLayer('terrain');
+  streets = this._createLayer('streets');
+  hybrid = this._createLayer('hybrid');
+  satellite = this._createLayer('sat');
+  terrain = this._createLayer('terrain');
 
   basemaps = {
     Streets: this.streets,
@@ -33,7 +33,7 @@ class App {
     containerWorkouts.addEventListener('click', e => this._handleClick(e));
   }
 
-  createLayer(layer) {
+  _createLayer(layer) {
     return L.tileLayer(
       `http://{s}.google.com/vt/lyrs=${this.#layers[layer]}&x={x}&y={y}&z={z}`,
       {
@@ -94,11 +94,7 @@ class App {
       }
     ).addTo(this.#mymap);
 
-    //
-    //
     L.control.layers(this.basemaps, null).addTo(this.#mymap);
-    //
-    //
 
     L.marker([latitude, longitude])
       .addTo(this.#mymap)
@@ -135,10 +131,6 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
 
-    // test
-    this.createLayer('terain');
-
-    //
     const type = inputType.value;
     const dist = +inputDistance.value;
     const duration = +inputDuration.value;
