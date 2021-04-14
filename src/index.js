@@ -13,11 +13,12 @@ class App {
   #mymap;
   #latlng;
   #workouts = [];
+  #markers = [];
   #layers = { streets: 'm', hybrid: 's,h', sat: 's', terrain: 'p' };
-  streets = this._changeLayer('streets');
-  hybrid = this._changeLayer('hybrid');
-  satellite = this._changeLayer('sat');
-  terrain = this._changeLayer('terrain');
+  streets = this._createLayer('streets');
+  hybrid = this._createLayer('hybrid');
+  satellite = this._createLayer('sat');
+  terrain = this._createLayer('terrain');
 
   basemaps = {
     Streets: this.streets,
@@ -33,7 +34,7 @@ class App {
     containerWorkouts.addEventListener('click', e => this._handleClick(e));
   }
 
-  _changeLayer(layer) {
+  _createLayer(layer) {
     return L.tileLayer(
       `http://{s}.google.com/vt/lyrs=${this.#layers[layer]}&x={x}&y={y}&z={z}`,
       {
@@ -55,13 +56,13 @@ class App {
   _deleteWorkout(id) {
     for (let i = 0; i < this.#workouts.length; i++) {
       if (this.#workouts[i].id == id) {
-        this._deleteMarker(this.#workouts[i]);
         this.#workouts.splice(i, 1);
+        this.#markers[i].remove();
+        this.#markers.splice(i, 1);
       }
     }
     this._storeWorkouts();
     document.getElementById(id).remove();
-    // also we have to remove the marker
   }
 
   _getPosition() {
@@ -88,11 +89,7 @@ class App {
       }
     ).addTo(this.#mymap);
 
-    //
-    //
     L.control.layers(this.basemaps, null).addTo(this.#mymap);
-    //
-    //
 
     L.marker([latitude, longitude])
       .addTo(this.#mymap)
@@ -129,10 +126,6 @@ class App {
   _newWorkout(e) {
     e.preventDefault();
 
-    // test
-    this._changeLayer('terain');
-
-    //
     const type = inputType.value;
     const dist = +inputDistance.value;
     const duration = +inputDuration.value;
@@ -177,16 +170,11 @@ class App {
     }
   }
 
-  _deleteMarker(workout) {
-    console.log('trying to delete the marker now');
-    let { lat, lng } = workout.coords;
-    let tempMarker = [lat, lng];
-    this.#mymap.removeLayer(tempMarker);
-  }
-
   _renderWorkoutMarker(workout) {
     let { lat, lng } = workout.coords;
-    L.marker([lat, lng])
+    const marker = L.marker([lat, lng]);
+    this.#markers.push(marker);
+    marker
       .addTo(this.#mymap)
       .bindPopup(
         L.popup({
@@ -202,6 +190,7 @@ class App {
         `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`
       )
       .openPopup();
+    marker.addEventListener('mouseover', e => console.log(this.markers));
     this._clearForm();
     this._renderWorkout(workout);
     this._storeWorkouts();
