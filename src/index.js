@@ -13,6 +13,7 @@ class App {
   #mymap;
   #latlng;
   #workouts = [];
+  #markers = [];
   #layers = { streets: 'm', hybrid: 's,h', sat: 's', terrain: 'p' };
   streets = this._createLayer('streets');
   hybrid = this._createLayer('hybrid');
@@ -55,19 +56,13 @@ class App {
   _deleteWorkout(id) {
     for (let i = 0; i < this.#workouts.length; i++) {
       if (this.#workouts[i].id == id) {
-        // this._deleteMarker(this.#workouts[i]);
         this.#workouts.splice(i, 1);
+        this.#markers[i].remove();
+        this.#markers.splice(i, 1);
       }
     }
     this._storeWorkouts();
-    // also we have to remove the marker
-  }
-
-  _deleteMarker(workout) {
-    console.log('trying to delete the marker now');
-    let { lat, lng } = workout.coords;
-    let tempMarker = [lat, lng];
-    this.#mymap.removeLayer(tempMarker);
+    document.getElementById(id).remove();
   }
 
   _getPosition() {
@@ -177,7 +172,9 @@ class App {
 
   _renderWorkoutMarker(workout) {
     let { lat, lng } = workout.coords;
-    L.marker([lat, lng])
+    const marker = L.marker([lat, lng]);
+    this.#markers.push(marker);
+    marker
       .addTo(this.#mymap)
       .bindPopup(
         L.popup({
@@ -193,6 +190,7 @@ class App {
         `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`
       )
       .openPopup();
+    marker.addEventListener('mouseover', e => console.log(this.markers));
     this._clearForm();
     this._renderWorkout(workout);
     this._storeWorkouts();
