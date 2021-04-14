@@ -4,7 +4,7 @@ This project is based on [Jonas Schmedtmann's](https://github.com/jonasschmedtma
 
 ## Improvements
 
-The project was not compatible with older browser that do not support the newest features of JavaScript like private class methods and private class properties. I solved this problem by adding Babel 7. Also added webpack to package a smaller solution.
+The project was not compatible with older browsers that do not support the newest features of JavaScript like private class methods and private class properties. I solved this problem by adding Babel 7. Also added webpack to package a smaller solution.
 
 ## Improvements
 
@@ -12,8 +12,9 @@ The project was not compatible with older browser that do not support the newest
 2. By clicking the trash icon next to a workout you can delete it. It is removed from the list and the localStorage.
 3. Workout, Running and Cycling classes are in a separate file.
 4. Fixed the Date reset to today problem. All dates are being saved and restored correctly.
-5. Add map control to select which kind of map display. Available option are Streets, Satellite, Hybrid, and Terrain.
+5. Add map control to select which kind of map display. Available options are Streets, Satellite, Hybrid, and Terrain.
 6. The marker is removed when deleting a workout.
+
 
 ## What is next
 
