@@ -4,7 +4,7 @@ This project is based on [Jonas Schmedtmann's](https://github.com/jonasschmedtma
 
 ## Improvements
 
-The project was not compatible with older browser that do not support the newest features of JavaScript like private class methods and private class properties. I solved this problem by adding Babel 7. Also added webpack to package a smaller solution.
+The project was not compatible with older browsers that do not support the newest features of JavaScript like private class methods and private class properties. I solved this problem by adding Babel 7. Also added webpack to package a smaller solution.
 
 ## Improvements
 
