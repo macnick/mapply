@@ -14,6 +14,7 @@ The project was not compatible with older browsers that do not support the newes
 4. Fixed the Date reset to today problem. All dates are being saved and restored correctly.
 5. Add map control to select which kind of map display. Available options are Streets, Satellite, Hybrid, and Terrain.
 6. The marker is removed when deleting a workout.
+7. Add a helpful message with instructions, when there are no workouts stored.
 
 
 ## What is next
@@ -28,6 +29,7 @@ The project was not compatible with older browsers that do not support the newes
 8. Ability to draw lines and shapes instead of points
 9. Geocode location from coordinates (Athens, Greece)
 10. Keep the zoom level set by user
+11. Add a loading spinner
 
 # How to Install and Run in Your Computer
 

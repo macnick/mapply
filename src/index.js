@@ -1,6 +1,7 @@
 'use strict';
 import { Running, Cycling } from './workoutClasses.js';
 
+const message = document.querySelector('.workout--message');
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
 const inputType = document.querySelector('.form__input--type');
@@ -34,6 +35,10 @@ class App {
     containerWorkouts.addEventListener('click', e => this._handleClick(e));
   }
 
+  _toggleMessage() {
+    message.style.display = this.#workouts.length > 0 ? 'none' : 'grid';
+  }
+
   _createLayer(layer) {
     return L.tileLayer(
       `http://{s}.google.com/vt/lyrs=${this.#layers[layer]}&x={x}&y={y}&z={z}`,
@@ -63,6 +68,7 @@ class App {
     }
     this._storeWorkouts();
     document.getElementById(id).remove();
+    this._toggleMessage();
   }
 
   _getPosition() {
@@ -242,6 +248,7 @@ class App {
         </li>
     `;
     form.style.display = 'none';
+    this._toggleMessage();
     form.insertAdjacentHTML('afterend', html);
     setTimeout(() => (form.style.display = 'grid'), 700);
   }
