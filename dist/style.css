@@ -247,3 +247,51 @@ a:visited {
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
 }
+
+.tooltip .tooltiptext {
+  font-family: 'Manrope', sans-serif;
+  visibility: hidden;
+  width: 110px;
+  background-color: var(--color-dark--2);
+  color: var(--color-light--3);
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 5px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-right {
+  top: -15px;
+  left: 25%;
+}
+
+.tooltip .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 43%;
+  right: 100%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent var(--color-dark--2) transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
