@@ -52,7 +52,24 @@ a:visited {
 .logo {
   height: 5.2rem;
   align-self: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.control__buttons {
+  background-color: var(--color-dark--1);
+  border-radius: 5px;
+  /* padding: 1rem 2.25rem; */
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem 1.5rem;
+}
+
+.control__button {
+  font-size: 1.9rem;
+  /* height: 1.28rem; */
 }
 
 .workouts {
