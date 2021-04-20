@@ -12,7 +12,7 @@ The project was not compatible with older browsers that do not support the newes
 2. User can delete a workout, by clicking the trash icon next to it. It is removed from the list and the localStorage.
 3. Workout, Running and Cycling classes are in a separate file.
 4. Fixed the Date reset to today problem. All dates are being saved and restored correctly.
-5. Add map control to select which kind of map display. Available options are Streets, Satellite, Hybrid, and Terrain.
+5. Add map control to select which kind of map to display. Available options are Streets, Satellite, Hybrid, and Terrain.
 6. The marker is removed when deleting a workout.
 7. Add a helpful message with instructions, when there are no workouts stored.
 
