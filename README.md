@@ -21,6 +21,8 @@ Mapply is live on Netlify
 6. The marker is removed when deleting a workout.
 7. Add a helpful message with instructions, when there are no workouts stored.
 
+### Bug fixes
+
 ## What is next
 
 1. Ability to delete all workouts
