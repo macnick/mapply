@@ -20,7 +20,7 @@ The project was not compatible with older browsers that do not support the newes
 ## What is next
 
 1. Ability to delete all workouts
-2. Display weather for workouts time and place
+2. Display weather for workouts time and place. This one is ambitious
 3. Ability to edit a workout
 4. Ability to show workouts based on category
 5. Add an alert before deleting a workout
