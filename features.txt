@@ -1,7 +1,7 @@
-1. Create a message when no workouts are saved
-2. Ability to delete all workouts
-3. Ability to edit a workout
-4. Ability to sort workouts bu dist/dur or speed
+1. Ability to delete all workouts
+2. Ability to edit a workout
+3. Ability to sort workouts bu dist/dur or speed
+
 5. Create better error messages for form validation
 6. Position the map to show all the workouts
 7. Ability to draw lines and shapes instead of points
