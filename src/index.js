@@ -243,7 +243,8 @@ class App {
           </div>
           <div class="workout__btns">
           <span class="workout__btn edit">✏️</span>
-            <span class="workout__btn trash">🗑</span>
+            <span class="workout__btn trash">🗑
+            </span>
           </div>
         </li>
     `;
