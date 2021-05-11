@@ -6,6 +6,11 @@ This project is based on [Jonas Schmedtmann's](https://github.com/jonasschmedtma
 
 The project was not compatible with older browsers that do not support the newest features of JavaScript, like private class methods and private class properties. I solved this problem by adding Babel 7. Also added webpack to package a smaller solution.
 
+## Live demo
+
+Mapply is live on Netlify
+[Mapply](https://mapply2021.netlify.app/)
+
 ## Improvements
 
 1. Workout data is saved to localStorage. The data is converted to JSON and as a result, the classes and all inheritance are destroyed. Fixed this by recreating the objects while loading them from the localStorage.
@@ -15,7 +20,6 @@ The project was not compatible with older browsers that do not support the newes
 5. Add map control to select which kind of map to display. Available options are Streets, Satellite, Hybrid, and Terrain.
 6. The marker is removed when deleting a workout.
 7. Add a helpful message with instructions, when there are no workouts stored.
-
 
 ## What is next
 
