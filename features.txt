@@ -1,9 +1,8 @@
 1. Ability to delete all workouts
 2. Ability to edit a workout
 3. Ability to sort workouts bu dist/dur or speed
-
-5. Create better error messages for form validation
-6. Position the map to show all the workouts
-7. Ability to draw lines and shapes instead of points
-8. Geocode location from coordinates (Faro, Portugal)
-9. Display weather for workouts time and place
+4. Create better error messages for form validation
+5. Position the map to show all the workouts
+6. Ability to draw lines and shapes instead of points
+7. Geocode location from coordinates (Faro, Portugal)
+8. Display weather for workouts time and place
