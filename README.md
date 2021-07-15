@@ -35,7 +35,7 @@ Mapply is live on Netlify
 10. Keep the zoom level set by user
 11. Add a loading spinner
 
-# How to Install and Run in Your Computer
+## How to Install and Run in Your Computer
 
 To run the scripts **npm** is required. To get npm you have to install [Node.js](https://nodejs.org). Follow the installation instructions for your system Mac, Linux or Windows.
 
