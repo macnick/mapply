@@ -44,7 +44,7 @@ After installing Node, use your terminal and run the commands after each instruc
 | Command                                           | Description                                  |
 | ------------------------------------------------- | -------------------------------------------- |
 | `git clone https://github.com/macnick/mapply.git` | Clone the repository to you computer         |
-| `cd bookaduc-client`                              | Navigate to the newly created folder         |
+| `cd mapply`                                       | Navigate to the newly created folder         |
 | `npm install`                                     | Install dependencies on your directory       |
 | `npm start`                                       | Run the app and start the development server |
 |                                                   | Press `Ctrl + c` to kill http-server process |
