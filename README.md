@@ -13,7 +13,7 @@ Mapply is live on Netlify
 
 ## Improvements
 
-1. Workout data is saved to localStorage. The data is converted to JSON and as a result, the classes and all inheritance are destroyed. Fixed this by recreating the objects while loading them from the localStorage.
+1. Workout data is saved to localStorage.
 2. User can delete a workout, by clicking the trash icon next to it. It is removed from the list and the localStorage.
 3. Workout, Running and Cycling classes are in a separate file.
 4. Add map control to select which kind of map to display. Available options are Streets, Satellite, Hybrid, and Terrain.
@@ -23,6 +23,7 @@ Mapply is live on Netlify
 ### Bug fixes
 
 1. Fixed the Date reset to today problem. All dates are being saved and restored correctly.
+2. Before saving the data to loaclStorage, it is converted to JSON and as a result, all classes and inheritance are destroyed. Fixed this by recreating the objects while loading them from the localStorage.
 
 ## What is next
 

@@ -4,5 +4,5 @@
 4. Create better error messages for form validation
 5. Position the map to show all the workouts
 6. Ability to draw lines and shapes instead of points
-7. Geocode location from coordinates (Faro, Portugal)
+7. Geocode location from coordinates (Athens, Greece)
 8. Display weather for workouts time and place
