@@ -21,7 +21,7 @@
   "homepage": "https://github.com/macnick/mapply#readme",
   "devDependencies": {
     "@babel/cli": "^7.16.7",
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "babel-loader": "^8.2.3",
     "webpack": "^5.65.0",
