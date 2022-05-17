@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "@babel/plugin-proposal-private-methods": "^7.16.11",
+    "@babel/plugin-proposal-private-methods": "^7.17.12",
     "@babel/polyfill": "^7.12.1",
     "lodash": "^4.17.21",
     "urix": "^0.1.0"
